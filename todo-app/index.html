@@ -13,13 +13,17 @@
       .complete {
         text-decoration: line-through;
       }
+
+      .complete .button {
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
     <section x-data="todoApp">
       <h1>Todo List</h1>
 
-      <div style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px">
         <!---
       by enter klik using
       @keydown.enter="addNewTodo()" langsung di input type
@@ -51,6 +55,7 @@
                 <td x-text="todo.completed ? 'Selesai' : 'Belum'"></td>
                 <td>
                   <input type="checkbox" x-model="todo.completed" />
+                  <button class="button"@click="removeTodo(todo)">x</button>
                 </td>
               </tr>
             </template>
@@ -93,6 +98,12 @@
               this.newTodo = "";
             }
           },
+
+          // method hapus data
+          removeTodo(todo) {
+            this.todos = this.todos.filter((t) => t !== todo)
+          }
+
         }));
       });
     </script>
