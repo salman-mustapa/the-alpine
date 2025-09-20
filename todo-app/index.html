@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar AlpineJS</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <section x-data="todoApp">
+      <h1>Todo List</h1>
+      <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="todo in todos">
+            <tr>
+              <td x-text="todo.id"></td>
+              <td x-text="todo.title"></td>
+              <td x-text="todo.completed ? 'Selesai' : 'Belum'"></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </section>
+
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("todoApp", () => ({
+          todos: [
+            {
+              id: 1,
+              title: "Belajar AlpineJS",
+              completed: true,
+            },
+            {
+              id: 2,
+              title: "Membuat Todo List",
+              completed: false,
+            },
+          ],
+        }));
+      });
+    </script>
+  </body>
+</html>
