@@ -8,42 +8,55 @@
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+
+    <style>
+      .complete {
+        text-decoration: line-through;
+      }
+    </style>
   </head>
   <body>
     <section x-data="todoApp">
       <h1>Todo List</h1>
 
-      
-      <!---
+      <div style="margin-bottom: 10px;">
+        <!---
       by enter klik using
       @keydown.enter="addNewTodo()" langsung di input type
       -->
-      <input type="text" x-model="newTodo" placeholder="Tambah data baru" />
-      
-      <!-- 
+        <input type="text" x-model="newTodo" placeholder="Tambah data baru" />
+
+        <!-- 
       by click button using
       @click="addNewTodo()"
       -->
-      <button @click="addNewTodo()">Simpan</button>
-      
-      <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Judul</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <template x-for="todo in todos">
+        <button @click="addNewTodo()">Simpan</button>
+      </div>
+
+      <div>
+        <table border="1" cellpadding="10" cellspacing="0">
+          <thead>
             <tr>
-              <td x-text="todo.id"></td>
-              <td x-text="todo.title"></td>
-              <td x-text="todo.completed ? 'Selesai' : 'Belum'"></td>
+              <th>No</th>
+              <th>Judul</th>
+              <th>Status</th>
+              <th>Aksi</th>
             </tr>
-          </template>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <template x-for="todo in todos">
+              <tr :class="todo.completed ? 'complete' : ''">
+                <td x-text="todo.id"></td>
+                <td x-text="todo.title"></td>
+                <td x-text="todo.completed ? 'Selesai' : 'Belum'"></td>
+                <td>
+                  <input type="checkbox" x-model="todo.completed" />
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <script>
@@ -79,7 +92,7 @@
               // reset input
               this.newTodo = "";
             }
-          }
+          },
         }));
       });
     </script>
