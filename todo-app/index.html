@@ -12,6 +12,20 @@
   <body>
     <section x-data="todoApp">
       <h1>Todo List</h1>
+
+      
+      <!---
+      by enter klik using
+      @keydown.enter="addNewTodo()" langsung di input type
+      -->
+      <input type="text" x-model="newTodo" placeholder="Tambah data baru" />
+      
+      <!-- 
+      by click button using
+      @click="addNewTodo()"
+      -->
+      <button @click="addNewTodo()">Simpan</button>
+      
       <table border="1" cellpadding="10" cellspacing="0">
         <thead>
           <tr>
@@ -35,6 +49,7 @@
     <script>
       document.addEventListener("alpine:init", () => {
         Alpine.data("todoApp", () => ({
+          // show data
           todos: [
             {
               id: 1,
@@ -47,6 +62,24 @@
               completed: false,
             },
           ],
+
+          // inisialisasi model data
+          newTodo: "",
+
+          // method tambah data
+          addNewTodo() {
+            if (this.newTodo) {
+              // push data ke array todos
+              this.todos.push({
+                id: this.todos.length + 1,
+                title: this.newTodo,
+                completed: false,
+              });
+
+              // reset input
+              this.newTodo = "";
+            }
+          }
         }));
       });
     </script>
